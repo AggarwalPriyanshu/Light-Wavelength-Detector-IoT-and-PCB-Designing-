@@ -1,0 +1,131 @@
+#include <Wire.h>
+#include <Adafruit_AS7341.h>
+#include <Arduino.h>
+
+// Initialize the AS7341 object
+Adafruit_AS7341 as7341;
+
+// Pin configuration for the UV sensor and LEDs
+const int uvSensorPin = 34;  // Analog pin for the S12SD UV sensor
+const int violetLED = 2;     // LED for Violet
+const int blueLED = 4;       // LED for Blue
+const int greenLED = 5;      // LED for Green
+const int yellowLED = 12;    // LED for Yellow
+const int orangeLED = 13;    // LED for Orange
+const int redLED = 14;       // LED for Red
+const int irLED = 15;        // LED for IR
+
+void setup() {
+  Serial.begin(115200);  // Start serial communication
+
+  // Initialize I2C communication with the AS7341 sensor
+  if (!as7341.begin()) {
+    Serial.println("Failed to initialize AS7341 sensor! Check wiring.");
+    while (1)
+      ;  // Stop the program if initialization fails
+  }
+  Serial.println("AS7341 sensor initialized.");
+
+  // Configure the AS7341 to start reading in synchronous mode
+  as7341.startReading();
+
+  // Set all LED pins as OUTPUT
+  pinMode(violetLED, OUTPUT);
+  pinMode(blueLED, OUTPUT);
+  pinMode(greenLED, OUTPUT);
+  pinMode(yellowLED, OUTPUT);
+  pinMode(orangeLED, OUTPUT);
+  pinMode(redLED, OUTPUT);
+  pinMode(irLED, OUTPUT);
+
+  digitalWrite(violetLED, LOW);
+  digitalWrite(blueLED, LOW);
+  digitalWrite(greenLED, LOW);
+  digitalWrite(yellowLED, LOW);
+  digitalWrite(orangeLED, LOW);
+  digitalWrite(redLED, LOW);
+  digitalWrite(irLED, LOW);
+  delay(2000);
+}
+
+void loop() {
+  // Create an array to hold channel data (8 spectral channels)
+  uint16_t channelData[8];
+
+  // Read data from all spectral channels
+  as7341.readAllChannels(channelData);
+
+  // Read UV light data from the S12SD sensor
+  int uvValue = analogRead(uvSensorPin);
+
+  // Print out the values for the Serial Plotter
+  Serial.print(uvValue);  // UV light from S12SD sensor
+  Serial.print(" ");
+  Serial.print(channelData[0]);  // Violet (415 nm)
+  Serial.print(" ");
+  Serial.print(channelData[1]);  // Blue (445 nm)
+  Serial.print(" ");
+  Serial.print(channelData[2]);  // Green (480 nm)
+  Serial.print(" ");
+  Serial.print(channelData[3]);  // Yellow (515 nm)
+  Serial.print(" ");
+  Serial.print(channelData[4]);  // Orange (555 nm)
+  Serial.print(" ");
+  Serial.print(channelData[5]);  // Red (590 nm)
+  Serial.print(" ");
+  Serial.print(channelData[6]);  // Near IR (630 nm)
+  Serial.println();              // End of the line for the Serial Plotter
+
+  // Determine the LED to light up based on the highest value
+  int maxValue = uvValue;  // Start with UV value
+  int maxIndex = 0;        // Initialize the index for max value
+
+  // Compare UV value with other channel values
+  for (int i = 0; i < 7; i++) {  // We have 7 channels from AS7341
+    if (channelData[i] > maxValue) {
+      maxValue = channelData[i];
+      maxIndex = i + 1;  // Adjust index to account for UV as the first value
+    }
+  }
+
+  int c0 = (channelData[0]) / 2;
+  int c1 = (channelData[1]) / 2;
+  int c2 = (channelData[2]) / 2;
+  int c3 = (channelData[3]) / 2;
+  int c4 = (channelData[4]) / 2;
+  int c5 = (channelData[5]) / 4;
+  int c6 = (channelData[6]) / 4;
+
+  // Turn off all LEDs initially
+
+
+  // Light up the LED corresponding to the maximum value
+
+
+  digitalWrite(violetLED, HIGH);
+
+
+  analogWrite(violetLED, c0);
+
+
+  analogWrite(blueLED, c1);
+
+
+  analogWrite(greenLED, c2);
+
+
+  analogWrite(yellowLED, c3);
+
+
+  analogWrite(orangeLED, c4);
+
+
+  analogWrite(redLED, c5);
+
+
+  analogWrite(irLED, c6);
+
+
+
+  delay(500);  // 500 ms delay for smoother visual representation
+}
