@@ -1,4 +1,5 @@
-# 🌈 Light Wavelength Detector (IoT & PCB Designing)
+# 🔬 Light Wavelength Detector (IoT & PCB Designing)
+
 
 ![IoT](https://img.shields.io/badge/Domain-IoT-blue)
 ![Embedded](https://img.shields.io/badge/Embedded-ESP32-success)
