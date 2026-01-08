@@ -78,7 +78,7 @@ This project emphasizes **core electronics understanding, sensor interfacing, an
 ---
 
 ## 📂 Repository Structure
-```text
+text
 ├── Arduino Code.txt
 ├── CIRCUIT DIAGRAM.jpeg
 ├── CIRCUIT DIAGRAM 2.jpeg
