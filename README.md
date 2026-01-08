@@ -78,7 +78,7 @@ This project emphasizes **core electronics understanding, sensor interfacing, an
 ---
 
 ## 📂 Repository Structure
-text
+```text
 ├── Arduino Code.txt
 ├── CIRCUIT DIAGRAM.jpeg
 ├── CIRCUIT DIAGRAM 2.jpeg
@@ -86,6 +86,7 @@ text
 ├── PERFECT CIRCUIT DOWN LAYER.jpeg
 ├── Video of Working Project.mp4
 └── README.md
+```
 ## ▶️ Demonstration
 A working demonstration video is included in the repository, showcasing:
 - Live light wavelength detection
