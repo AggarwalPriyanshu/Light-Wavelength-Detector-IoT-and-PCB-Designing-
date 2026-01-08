@@ -119,7 +119,7 @@ A working demonstration video is included in the repository, showcasing:
 Electronics & Communication Engineering  
 
 📧 Email: Priyanshuaggarwal.in@gmail.com  
-🔗 LinkedIn: https://linkedin.com/in/priyanshu1201  
+💼 LinkedIn: https://linkedin.com/in/priyanshu1201  
 💻 GitHub: https://github.com/AggarwalPriyanshu  
 
 ---
